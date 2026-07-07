@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctica Funcional — Haskell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilosHaskellPractica.css">
+</head>
+<body>
+
+  <div class="contenedorApp">
+
+    <!-- ===== ENCABEZADO ===== -->
+    <header class="encabezadoPrincipal">
+      <div class="logoApp">λ <span class="logoAppSubtitulo">haskell</span>.practice</div>
+      <div class="subtituloApp">Composición · Orden superior · Recursividad</div>
+    </header>
+
+    <!-- ===== BARRA DE NAVEGACIÓN ===== -->
+    <nav class="barraNavegacion">
+      <button class="tabNavegacion tabNavegacionActivo" onclick="mostrarTab('ejercicios', this)">
+        <span class="iconoTab">✦</span> Ejercicios
+      </button>
+      <button class="tabNavegacion" onclick="mostrarTab('teoria', this)">
+        <span class="iconoTab">◎</span> Teoría
+      </button>
+      <button class="tabNavegacion" onclick="mostrarTab('examen', this)">
+        <span class="iconoTab">◇</span> Examen simulado
+      </button>
+      <button class="tabNavegacion" onclick="mostrarTab('errores', this)">
+        <span class="iconoTab">△</span> Mis errores
+      </button>
+    </nav>
+
+    <main class="contenidoPrincipal">
+
+      <!-- ===== PANEL EJERCICIOS ===== -->
+      <section class="panelContenido panelActivo" id="panel-ejercicios">
+
+        <div class="encabezadoSeccion">
+          <h2 class="tituloSeccion">Práctica por tema</h2>
+          <p class="descripcionSeccion">Escribí tu solución en Haskell y verificá. Los errores se guardan automáticamente.</p>
+        </div>
+
+        <!-- Filtros por tema -->
+        <div class="filaFiltros">
+          <button class="botonFiltro botonFiltroActivo" onclick="filtrarEjercicios('all', this)">Todos</button>
+          <button class="botonFiltro" onclick="filtrarEjercicios('composicion', this)">Composición</button>
+          <button class="botonFiltro" onclick="filtrarEjercicios('recursion', this)">Recursión</button>
+          <button class="botonFiltro" onclick="filtrarEjercicios('orden-superior', this)">Orden superior</button>
+          <button class="botonFiltro" onclick="filtrarEjercicios('tipos', this)">Tipos de datos</button>
+        </div>
+
+        <!-- Listado de ejercicios (renderizado por JS) -->
+        <div id="contenedorEjercicios"></div>
+
+      </section>
+
+      <!-- ===== PANEL TEORÍA ===== -->
+      <section class="panelContenido" id="panel-teoria">
+
+        <div class="encabezadoSeccion">
+          <h2 class="tituloSeccion">Teoría rápida</h2>
+          <p class="descripcionSeccion">Los conceptos esenciales del paradigma funcional para el parcial.</p>
+        </div>
+
+        <!-- Bloque composición -->
+        <div class="filaEtiquetaTema">
+          <span class="etiquetaTema etiquetaTemaComposicion">Composición</span>
+        </div>
+        <div class="gridTeoria">
+          <div class="bloqueTeoria">
+            <h4 class="tituloSubBloque">Operador (.)</h4>
+            <pre class="bloqueCodigoHaskell"><span class="codigoComentario">-- (f . g) x = f (g x)</span>
+dobleIncremento = (*2) . (+1)
+<span class="codigoComentario">-- dobleIncremento 3 → 8</span>
+
+nombreFalopa = (=='i') . last
+<span class="codigoComentario">-- sin auxiliares, solo composición</span></pre>
+          </div>
+          <div class="bloqueTeoria">
+            <h4 class="tituloSubBloque">Aplicación parcial</h4>
+            <pre class="bloqueCodigoHaskell">sumar :: Int -> Int -> Int
+sumar x y = x + y
+
+sumar5 = sumar 5
+<span class="codigoComentario">-- sumar5 3 → 8</span>
+
+<span class="codigoComentario">-- secciones de operadores:</span>
+triple  = (*3)
+mayor10 = (>10)</pre>
+          </div>
+        </div>
+
+        <!-- Bloque recursión -->
+        <div class="filaEtiquetaTema">
+          <span class="etiquetaTema etiquetaTemaRecursion">Recursión</span>
+        </div>
+        <div class="gridTeoria">
+          <div class="bloqueTeoria">
+            <h4 class="tituloSubBloque">Estructura básica</h4>
+            <pre class="bloqueCodigoHaskell">longitud :: [a] -> Int
+longitud []     = 0
+<span class="codigoComentario">-- ↑ caso base</span>
+longitud (_:xs) = 1 + longitud xs
+<span class="codigoComentario">-- ↑ caso recursivo</span></pre>
+          </div>
+          <div class="bloqueTeoria">
+            <h4 class="tituloSubBloque">Mejora sustentable (parcial)</h4>
+            <pre class="bloqueCodigoHaskell">mejora [] _ = True
+mejora (x:xs) prev
+  | x &lt; prev       = False
+  | x &gt; prev + 3   = False
+  | otherwise      = mejora xs x</pre>
+          </div>
+        </div>
+
+        <!-- Bloque orden superior -->
+        <div class="filaEtiquetaTema">
+          <span class="etiquetaTema etiquetaTemaOrdenSuperior">Orden superior</span>
+        </div>
+        <div class="gridTeoria">
+          <div class="bloqueTeoria">
+            <h4 class="tituloSubBloque">map / filter / fold</h4>
+            <pre class="bloqueCodigoHaskell">map (+1) [1,2,3]
+<span class="codigoComentario">-- [2,3,4]</span>
+filter even [1..10]
+<span class="codigoComentario">-- [2,4,6,8,10]</span>
+foldr (+) 0 [1,2,3]
+<span class="codigoComentario">-- 6</span></pre>
+          </div>
+          <div class="bloqueTeoria">
+            <h4 class="tituloSubBloque">any / all / take</h4>
+            <pre class="bloqueCodigoHaskell">any (>10) [1,5,15]  <span class="codigoComentario">-- True</span>
+all even [2,4,6]    <span class="codigoComentario">-- True</span>
+take 3 [1..]        <span class="codigoComentario">-- [1,2,3]</span>
+
+<span class="codigoComentario">-- listas infinitas: lazy!</span>
+take 3 (filter even [1..])
+<span class="codigoComentario">-- termina ✓</span></pre>
+          </div>
+        </div>
+
+        <!-- Bloque tipos de datos -->
+        <div class="filaEtiquetaTema">
+          <span class="etiquetaTema etiquetaTemaTipos">Tipos de datos</span>
+        </div>
+        <div class="bloqueTeoriaAncho">
+          <h4 class="tituloSubBloque">data + record syntax</h4>
+          <pre class="bloqueCodigoHaskell">data Animal = Animal {
+  nombre  :: String,
+  tipo    :: String,
+  peso    :: Double,
+  edad    :: Int,
+  enfermo :: Bool
+} deriving (Show)
+
+<span class="codigoComentario">-- modificar un campo (inmutabilidad):</span>
+engorde :: Double -> Animal -> Animal
+engorde kilos a = a { peso = peso a + min kilos 5 }
+
+<span class="codigoComentario">-- proceso = lista de actividades:</span>
+type Proceso = [Animal -> Animal]
+
+aplicar :: Proceso -> Animal -> Animal
+aplicar ps a = foldl (flip ($)) a ps</pre>
+        </div>
+
+        <!-- Tips del parcial -->
+        <div class="cajaTipsExamen">
+          <h4 class="tituloTips">Tips para el parcial</h4>
+          <ul class="listaTips">
+            <li>Cuando dice "sin auxiliares ni recursión" → solo <code>(.)</code> y aplicación parcial.</li>
+            <li><code>nombreFalopa = (=='i') . last</code> — una línea, cero recursión.</li>
+            <li>Modelar un proceso como <code>[Animal → Animal]</code> y aplicarlo con <code>foldl (flip ($))</code>.</li>
+            <li><code>take N (filter f listaInfinita)</code> → computable (lazy). <code>length (filter f infinita)</code> → NO termina.</li>
+            <li>Para "la pasó mal": <code>any (&gt;30) . map diasRecuperacion . visitas</code></li>
+            <li>Recursión: siempre primero el caso base con lista vacía <code>[]</code>.</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- ===== PANEL EXAMEN ===== -->
+      <section class="panelContenido" id="panel-examen">
+
+        <div class="encabezadoSeccion">
+          <h2 class="tituloSeccion">Examen simulado</h2>
+          <p class="descripcionSeccion">Condiciones de parcial real. Respondé todo y entregá para ver tu nota.</p>
+        </div>
+
+        <!-- Selector de tema y botón generar -->
+        <div class="filaConfiguracionExamen">
+          <select class="selectorTemaExamen" id="selectorModoExamen">
+            <option value="granja">Tema: La Granja</option>
+            <option value="aventureros">Tema: Aventureros</option>
+            <option value="magos">Tema: Magos (Harry Potter)</option>
+            <option value="mixto">Mixto — todos los temas</option>
+          </select>
+          <button class="botonPrimario" onclick="generarExamen()">↻ Generar nuevo examen</button>
+        </div>
+
+        <!-- Preguntas del examen (renderizado por JS) -->
+        <div id="contenedorExamen">
+          <div class="estadoVacio">
+            <div class="iconoEstadoVacio">◇</div>
+            <p>Generá un examen para empezar.</p>
+          </div>
+        </div>
+
+        <!-- Resultado del examen (renderizado por JS) -->
+        <div id="contenedorResultadoExamen"></div>
+
+      </section>
+
+      <!-- ===== PANEL ERRORES ===== -->
+      <section class="panelContenido" id="panel-errores">
+
+        <div class="encabezadoSeccion">
+          <h2 class="tituloSeccion">Mis errores</h2>
+          <p class="descripcionSeccion">Historial automático de los errores que cometiste. Revisalos para no repetirlos.</p>
+        </div>
+
+        <!-- Historial (renderizado por JS) -->
+        <div id="contenedorHistorialErrores"></div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script src="logicaHaskellPractica.js"></script>
+</body>
+</html>

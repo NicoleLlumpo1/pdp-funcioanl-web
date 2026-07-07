@@ -1,0 +1,784 @@
+/* ============================================================
+   estilosHaskellPractica.css
+   Estilos para la app de práctica funcional en Haskell
+   ============================================================ */
+
+/* ===== VARIABLES Y RESET ===== */
+:root {
+  --colorFondo: #0f0f13;
+  --colorSuperficie: #17171e;
+  --colorSuperficie2: #1e1e28;
+  --colorBorde: rgba(255, 255, 255, 0.07);
+  --colorBorde2: rgba(255, 255, 255, 0.12);
+  --colorTexto: #e8e6f0;
+  --colorTextoApagado: #7a7890;
+  --colorPurpura: #9d84f5;
+  --colorPurpuraDim: rgba(157, 132, 245, 0.12);
+  --colorPurpuraBorde: rgba(157, 132, 245, 0.3);
+  --colorTeal: #4ecdc4;
+  --colorTealDim: rgba(78, 205, 196, 0.1);
+  --colorAmbar: #f7c948;
+  --colorAmbarDim: rgba(247, 201, 72, 0.1);
+  --colorCoral: #ff6b6b;
+  --colorCoralDim: rgba(255, 107, 107, 0.1);
+  --colorVerde: #6bcb77;
+  --colorVerdeDim: rgba(107, 203, 119, 0.1);
+  --fuenteMono: 'JetBrains Mono', monospace;
+  --fuenteSans: 'Inter', sans-serif;
+  --radioBase: 10px;
+  --radioChico: 6px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fuenteSans);
+  background: var(--colorFondo);
+  color: var(--colorTexto);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+code {
+  font-family: var(--fuenteMono);
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.contenedorApp {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contenidoPrincipal {
+  flex: 1;
+  padding: 28px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== ENCABEZADO ===== */
+.encabezadoPrincipal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--colorBorde);
+  background: var(--colorSuperficie);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.logoApp {
+  font-family: var(--fuenteMono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--colorPurpura);
+  letter-spacing: -0.3px;
+}
+
+.logoAppSubtitulo {
+  color: var(--colorTextoApagado);
+}
+
+.subtituloApp {
+  font-size: 12px;
+  color: var(--colorTextoApagado);
+  border-left: 1px solid var(--colorBorde2);
+  padding-left: 14px;
+}
+
+/* ===== NAVEGACIÓN POR TABS ===== */
+.barraNavegacion {
+  display: flex;
+  gap: 2px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--colorBorde);
+  background: var(--colorSuperficie);
+  overflow-x: auto;
+}
+
+.tabNavegacion {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--colorTextoApagado);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--fuenteSans);
+}
+
+.tabNavegacion:hover {
+  color: var(--colorTexto);
+}
+
+.tabNavegacionActivo {
+  color: var(--colorPurpura);
+  border-bottom-color: var(--colorPurpura);
+}
+
+.iconoTab {
+  font-size: 15px;
+}
+
+/* ===== PANELES ===== */
+.panelContenido {
+  display: none;
+}
+
+.panelActivo {
+  display: block;
+}
+
+/* ===== ENCABEZADO DE SECCIÓN ===== */
+.encabezadoSeccion {
+  margin-bottom: 20px;
+}
+
+.tituloSeccion {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.descripcionSeccion {
+  font-size: 13px;
+  color: var(--colorTextoApagado);
+}
+
+/* ===== TARJETAS ===== */
+.tarjetaEjercicio {
+  background: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioBase);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+
+.tituloTarjeta {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ===== ETIQUETAS / BADGES ===== */
+.etiquetaTipo {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.etiquetaDificultadBasico {
+  background: var(--colorTealDim);
+  color: var(--colorTeal);
+  border: 1px solid rgba(78, 205, 196, 0.25);
+}
+
+.etiquetaDificultadParcial {
+  background: var(--colorCoralDim);
+  color: var(--colorCoral);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.etiquetaDificultadConceptual {
+  background: var(--colorPurpuraDim);
+  color: var(--colorPurpura);
+  border: 1px solid var(--colorPurpuraBorde);
+}
+
+.etiquetaTema {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.etiquetaTemaComposicion {
+  background: var(--colorPurpuraDim);
+  color: var(--colorPurpura);
+  border: 1px solid var(--colorPurpuraBorde);
+}
+
+.etiquetaTemaRecursion {
+  background: var(--colorAmbarDim);
+  color: var(--colorAmbar);
+  border: 1px solid rgba(247, 201, 72, 0.25);
+}
+
+.etiquetaTemaOrdenSuperior {
+  background: var(--colorTealDim);
+  color: var(--colorTeal);
+  border: 1px solid rgba(78, 205, 196, 0.25);
+}
+
+.etiquetaTemaTipos {
+  background: var(--colorCoralDim);
+  color: var(--colorCoral);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+/* ===== CÓDIGO ===== */
+.bloqueCodigoHaskell {
+  background: #0a0a10;
+  border: 1px solid var(--colorBorde2);
+  border-radius: var(--radioChico);
+  padding: 12px 16px;
+  font-family: var(--fuenteMono);
+  font-size: 12.5px;
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1.7;
+  color: #c9c2f0;
+  margin: 8px 0;
+}
+
+.codigoComentario {
+  color: var(--colorTextoApagado);
+}
+
+/* ===== DESCRIPCIÓN DE EJERCICIO ===== */
+.descripcionEjercicio {
+  font-size: 13px;
+  color: var(--colorTextoApagado);
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+/* ===== TEXTAREA DE RESPUESTA ===== */
+.campoRespuestaHaskell {
+  width: 100%;
+  background: #0a0a10;
+  border: 1px solid var(--colorBorde2);
+  border-radius: var(--radioChico);
+  padding: 10px 14px;
+  font-family: var(--fuenteMono);
+  font-size: 12.5px;
+  color: var(--colorTexto);
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.15s;
+  outline: none;
+  line-height: 1.7;
+}
+
+.campoRespuestaHaskell:focus {
+  border-color: var(--colorPurpura);
+}
+
+.campoRespuestaHaskell::placeholder {
+  color: #3d3a52;
+}
+
+/* ===== SELECT ===== */
+.selectorTemaExamen {
+  background: var(--colorSuperficie2);
+  border: 1px solid var(--colorBorde2);
+  border-radius: var(--radioChico);
+  padding: 8px 12px;
+  color: var(--colorTexto);
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--fuenteSans);
+}
+
+/* ===== BOTONES ===== */
+.filaAccionesEjercicio {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.botonAccion {
+  padding: 8px 16px;
+  border-radius: var(--radioChico);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--colorBorde2);
+  background: var(--colorSuperficie2);
+  color: var(--colorTexto);
+  transition: background 0.15s;
+  font-family: var(--fuenteSans);
+}
+
+.botonAccion:hover {
+  background: #252535;
+}
+
+.botonPrimario {
+  padding: 8px 16px;
+  border-radius: var(--radioChico);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--colorPurpura);
+  color: #0f0f13;
+  border: 1px solid var(--colorPurpura);
+  transition: background 0.15s;
+  font-family: var(--fuenteSans);
+}
+
+.botonPrimario:hover {
+  background: #b59af7;
+}
+
+.botonTextoEnlace {
+  background: none;
+  border: none;
+  color: var(--colorPurpura);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: var(--fuenteSans);
+  padding: 4px 0;
+}
+
+.botonSecundario {
+  padding: 8px 16px;
+  border-radius: var(--radioChico);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--colorBorde2);
+  background: var(--colorSuperficie2);
+  color: var(--colorTexto);
+  transition: background 0.15s;
+  font-family: var(--fuenteSans);
+}
+
+.botonSecundario:hover {
+  background: #252535;
+}
+
+/* ===== FEEDBACK DE VERIFICACIÓN ===== */
+.mensajeFeedback {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radioChico);
+  font-size: 13px;
+  display: none;
+  line-height: 1.6;
+}
+
+.feedbackCorrecto {
+  background: var(--colorVerdeDim);
+  color: var(--colorVerde);
+  border: 1px solid rgba(107, 203, 119, 0.25);
+  display: block;
+}
+
+.feedbackIncorrecto {
+  background: var(--colorCoralDim);
+  color: var(--colorCoral);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+  display: block;
+}
+
+.feedbackPista {
+  background: var(--colorPurpuraDim);
+  color: var(--colorPurpura);
+  border: 1px solid var(--colorPurpuraBorde);
+  display: block;
+}
+
+/* ===== FILTROS DE EJERCICIOS ===== */
+.filaFiltros {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.botonFiltro {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--colorBorde2);
+  background: none;
+  color: var(--colorTextoApagado);
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  font-family: var(--fuenteSans);
+}
+
+.botonFiltro:hover {
+  color: var(--colorTexto);
+}
+
+.botonFiltroActivo {
+  background: var(--colorPurpuraDim);
+  color: var(--colorPurpura);
+  border-color: var(--colorPurpuraBorde);
+}
+
+/* ===== TEORÍA ===== */
+.gridTeoria {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.bloqueTeoria {
+  background: var(--colorSuperficie2);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioBase);
+  padding: 16px;
+}
+
+.bloqueTeoriaAncho {
+  background: var(--colorSuperficie2);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioBase);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.tituloSubBloque {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--colorTextoApagado);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.filaEtiquetaTema {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* ===== TIPS DEL PARCIAL ===== */
+.cajaTipsExamen {
+  background: var(--colorPurpuraDim);
+  border: 1px solid var(--colorPurpuraBorde);
+  border-radius: var(--radioBase);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+
+.tituloTips {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--colorPurpura);
+  margin-bottom: 10px;
+}
+
+.listaTips {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.listaTips li {
+  font-size: 13px;
+  color: #c0b8e8;
+  line-height: 1.6;
+}
+
+.listaTips li::before {
+  content: '→ ';
+  color: var(--colorPurpura);
+}
+
+/* ===== EXAMEN ===== */
+.filaConfiguracionExamen {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.preguntaExamen {
+  border-left: 2px solid var(--colorPurpura);
+  padding-left: 16px;
+  margin-bottom: 22px;
+}
+
+.etiquetaPreguntaExamen {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--colorPurpura);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.descripcionPreguntaExamen {
+  font-size: 13px;
+  color: var(--colorTextoApagado);
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.tarjetaResultadoExamen {
+  margin-top: 20px;
+  background: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioBase);
+  padding: 20px;
+}
+
+.puntajeExamen {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: var(--fuenteMono);
+  color: var(--colorPurpura);
+  margin: 8px 0;
+}
+
+.subtituloPuntaje {
+  font-size: 18px;
+  color: var(--colorTextoApagado);
+}
+
+.etiquetaResultadoExamen {
+  font-size: 12px;
+  color: var(--colorTextoApagado);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.itemResultadoPregunta {
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radioChico);
+  font-size: 13px;
+}
+
+.itemResultadoCorrecto {
+  background: var(--colorVerdeDim);
+  color: var(--colorVerde);
+  border: 1px solid rgba(107, 203, 119, 0.2);
+}
+
+.itemResultadoIncorrecto {
+  background: var(--colorCoralDim);
+  color: var(--colorCoral);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.estadoAprobado {
+  color: var(--colorVerde);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.estadoRevisar {
+  color: var(--colorAmbar);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.estadoDesaprobado {
+  color: var(--colorCoral);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.notaResultadoExamen {
+  font-size: 12px;
+  color: var(--colorTextoApagado);
+  margin-top: 12px;
+}
+
+/* ===== ERRORES ===== */
+.gridEstadisticasError {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tarjetaEstadistica {
+  background: var(--colorSuperficie2);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioBase);
+  padding: 14px 16px;
+}
+
+.etiquetaEstadistica {
+  font-size: 11px;
+  color: var(--colorTextoApagado);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+}
+
+.valorEstadistica {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--colorPurpura);
+  font-family: var(--fuenteMono);
+}
+
+.valorEstadisticaChico {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--colorPurpura);
+}
+
+.contenedorBarraProgreso {
+  margin-bottom: 20px;
+}
+
+.filaEtiquetaProgreso {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--colorTextoApagado);
+  margin-bottom: 6px;
+}
+
+.barraProgreso {
+  height: 4px;
+  background: var(--colorSuperficie2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rellenoBarraProgreso {
+  height: 100%;
+  background: linear-gradient(90deg, var(--colorPurpura), var(--colorTeal));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.tarjetaHistorialErrores {
+  background: var(--colorSuperficie);
+  border: 1px solid var(--colorBorde);
+  border-radius: var(--radioBase);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+
+.tituloHistorialErrores {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.listaErrores {
+  list-style: none;
+}
+
+.itemError {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--colorBorde);
+}
+
+.itemError:last-child {
+  border-bottom: none;
+}
+
+.contadorError {
+  background: var(--colorCoralDim);
+  color: var(--colorCoral);
+  border: 1px solid rgba(255, 107, 107, 0.25);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.nombreEjercicioError {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.metadatoError {
+  font-size: 12px;
+  color: var(--colorTextoApagado);
+  margin-top: 2px;
+}
+
+.filaAccionesHistorial {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* ===== ESTADO VACÍO ===== */
+.estadoVacio {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--colorTextoApagado);
+}
+
+.iconoEstadoVacio {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .gridTeoria {
+    grid-template-columns: 1fr;
+  }
+
+  .gridEstadisticasError {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .encabezadoPrincipal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .subtituloApp {
+    border-left: none;
+    padding-left: 0;
+  }
+}
